@@ -57,6 +57,17 @@ You can configure a container's resource limits via the OPTIONAL `resources` fie
 
 The following parameters can be specified:
 
+* **`allowOvercommit`** *(bool, OPTIONAL)* - configures the memory type used WindowsHyperV containers.
+
+`true` *(default)* - Configures VA backed memory.
+`false`            - Configures physically backed memory.
+
+*Note: This does not apply to process isolated containers.*
+
+* **`enableDeferredCommit`** *(bool, OPTIONAL)* - enables deferred commit on VA backed memory for WindowsHyperV containers. This property is ignored if `AllowOvercommit` is `false`.
+
+*Note: This does not apply to process isolated containers.*
+
 * **`limit`** *(uint64, OPTIONAL)* - sets limit of memory usage in bytes.
 
 #### Example
@@ -65,11 +76,25 @@ The following parameters can be specified:
     "windows": {
         "resources": {
             "memory": {
+                "enableDeferredCommit": "true",
                 "limit": 2097152
             }
         }
     }
 ```
+*VA backed, deferred commit, 2MB memory*
+
+```json
+    "windows": {
+        "resources": {
+            "memory": {
+                "allowOvercommit": "false",
+                "limit": 2097152
+            }
+        }
+    }
+```
+*Physically backed, 2MB memory*
 
 ### <a name="configWindowsCpu" />CPU
 

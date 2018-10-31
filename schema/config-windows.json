@@ -22,6 +22,12 @@
                     "memory": {
                         "type": "object",
                         "properties": {
+                            "allowOvercommit": {
+                                "type": "boolean"
+                            },
+                            "enableDeferredCommit": {
+                                "type": "boolean"
+                            },
                             "limit": {
                                 "$ref": "defs.json#/definitions/uint64"
                             }

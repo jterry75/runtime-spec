@@ -469,7 +469,18 @@ type WindowsResources struct {
 
 // WindowsMemoryResources contains memory resource management settings.
 type WindowsMemoryResources struct {
-	// Memory limit in bytes.
+	// AllowOvercommit configures the memory type used WindowsHyperV containers.
+	//
+	// `true` *(default)* - Configures VA backed memory.
+	// `false` - Configures physically backed memory.
+	AllowOvercommit *bool `json:"allowOvercommit,omitempty"`
+
+	// EnableDeferredCommit enables deferred commit on VA backed memory for
+	// WindowsHyperV containers. This property is ignored if `AllowOvercommit`
+	// is `false`.
+	EnableDeferredCommit *bool `json:"enableDeferredCommit,omitempty"`
+
+	// Limit is the memory limit in bytes.
 	Limit *uint64 `json:"limit,omitempty"`
 }
 
